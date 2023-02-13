@@ -73,7 +73,7 @@ if __name__ == "__main__":
             model_training(data_path,output_path,model_name)
             generate_prediction_results(data_path,output_path)
             generate_reranked_results(data_path)
-            evaluate(data_path)
+            evaluate(data_path, output_path)
         else:
             print("Dataset not selected")
 
@@ -173,7 +173,9 @@ if __name__ == "__main__":
         # python app\main.py -o evaluation -d <<dataset_name>>
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
-            evaluate(data_path)
+            output_path = F"{str(path)}/output/MentalFAQ"
+
+            evaluate(data_path, output_path)
         else:
             print("Dataset not selected")
 
