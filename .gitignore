@@ -1,0 +1,7 @@
+/.idea
+/.vscode
+/venv
+/app/faq/BERT-FAQ/output
+/output
+/file/data/MentalFAQ/dataset
+/file/data/MentalFAQ/rank_results
