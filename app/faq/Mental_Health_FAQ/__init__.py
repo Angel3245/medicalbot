@@ -7,3 +7,4 @@ from .model_training import model_training
 from .generate_prediction_results import generate_prediction_results
 from .generate_reranked_results import generate_reranked_results
 from .evaluation import evaluate
+from .faq_bert_ranker import ranker
