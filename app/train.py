@@ -8,6 +8,7 @@ from model import *
 from sentence_transformers import SentenceTransformer
 from question_similarity import *
 from faq.Mental_Health_FAQ import *
+from preprocessing import *
 
 if __name__ == "__main__":
 

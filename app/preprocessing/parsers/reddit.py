@@ -1,8 +1,5 @@
-from evaluation import jaccard_similarity
-from evaluation import levenstein_distance
-
-class MentalFAQ_Parser(object):
-    """ Class for parsing & extracting data from aligned_question_answer.csv """
+class Reddit_Parser(object):
+    """ Class for parsing & extracting data from Reddit_comments.csv & Reddit_posts.csv """
 
     def __init__(self):
         self.faq_pairs = []
