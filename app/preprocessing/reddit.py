@@ -115,7 +115,7 @@ def parse_redditposts_support(posts_path, comments_path, output_path):
     df = df.rename(columns={'body': 'answer'})
     
     # create instance of MentalFAQ_Parser and generate query_answer_pairs
-    mentalfaq_parser = MentalFAQ_Parser()
+    mentalfaq_parser = Reddit_Parser()
     mentalfaq_parser.extract_data(df)
 
     # get query_answer_pairs

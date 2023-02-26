@@ -14,7 +14,7 @@ if __name__ == "__main__":
     path = Path.cwd()
 
     if args.option == "retrieve_answer":
-        
+        # python app\bot.py -o retrieve_answer
         top_k = 100
         dataset = 'MentalFAQ'
         fields = ['question_answer']
