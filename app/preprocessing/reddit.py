@@ -27,7 +27,8 @@ def parse_redditposts_questions(posts_path, comments_path, output_path):
     comments_df = comments_df.drop(columns_to_remove, axis=1)
 
     # filter by flair
-    flairs = ["DAE Questions", "Question", "help?"]
+    flairs = ["DAE Questions", "Question", ":snoo_thoughtful: help? :snoo_biblethump:",
+              ":orly: Help please!", "DAE?"]
     posts_df = posts_df.apply(lambda row: row[posts_df['link_flair_text'].isin(flairs)])
 
     # create a new comments_length column that contains the number of words per comment:
@@ -88,7 +89,7 @@ def parse_redditposts_support(posts_path, comments_path, output_path):
     comments_df = comments_df.drop(columns_to_remove, axis=1)
 
     # filter by flair
-    flairs = ["Needs A Hug/Support", "Need Support", "send support", "Advice"]
+    flairs = ["Needs A Hug/Support", "Need Support", ":snoo_hug: send support :snoo_sad:", "Advice", "Advice Needed", "Support", "Seeking Support"]
     posts_df = posts_df.apply(lambda row: row[posts_df['link_flair_text'].isin(flairs)])
 
     # create a new comments_length column that contains the number of words per comment:

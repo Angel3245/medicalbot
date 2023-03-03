@@ -14,7 +14,7 @@ from indexer import ingest_data
 from indexer import QA
 import logging
 
-def ingest_data_to_db(data_path):
+def ingest_data_to_db(data_path, index_name):
     # get list of query answer pairs
     query_answer_pairs_filepath = data_path+'/query_answer_pairs.json'
     relevance_label_df = get_relevance_label_df(query_answer_pairs_filepath)
@@ -28,8 +28,7 @@ def ingest_data_to_db(data_path):
         
         es = connections.create_connection(hosts=['localhost'])
         
-        # Index data to Elasticsearch 
-        index_name = "mentalfaq"
+        # Index data to Elasticsearch
         
         # Initialize index (only perform once)
         index = Index(index_name)

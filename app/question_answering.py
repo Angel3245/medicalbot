@@ -55,10 +55,23 @@ if __name__ == "__main__":
             output_path = F"{str(path)}/output/MentalFAQ"
 
             parse_mentalfaq(file_path, data_path)
-            ingest_data_to_db(data_path)
-            generate_hard_negatives(data_path)
+            ingest_data_to_db(data_path, "mentalfaq")
+            generate_hard_negatives(data_path, "mentalfaq")
             generate_ground_truth_dataset(data_path)
-            generate_topk_results(data_path)
+            generate_topk_results(data_path, "mentalfaq")
+            model_training(data_path,output_path,model_name)
+            generate_prediction_results(data_path,output_path)
+            generate_reranked_results(data_path)
+            evaluate(data_path, output_path)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+            output_path = F"{str(path)}/output/RedditFAQ"
+
+            ingest_data_to_db(data_path, "redditfaq")
+            generate_hard_negatives(data_path, "redditfaq")
+            generate_ground_truth_dataset(data_path)
+            generate_topk_results(data_path, "redditfaq")
             model_training(data_path,output_path,model_name)
             generate_prediction_results(data_path,output_path)
             generate_reranked_results(data_path)
@@ -87,7 +100,7 @@ if __name__ == "__main__":
             print("Dataset not selected")
 
     if args.option == "parsing_support":
-        # python app\question_answering.py -o parsing_qa -d <<dataset_name>>
+        # python app\question_answering.py -o parsing_support -d <<dataset_name>>
         if(args.dataset == "Reddit"):
             posts_path = F"{str(path)}/file/datasets/Reddit_posts.csv"
             comments_path = F"{str(path)}/file/datasets/Reddit_comments.csv"
@@ -105,7 +118,12 @@ if __name__ == "__main__":
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
 
-            ingest_data_to_db(data_path)
+            ingest_data_to_db(data_path, "mentalfaq")
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+
+            ingest_data_to_db(data_path, "redditfaq")
         else:
             print("Dataset not selected")
 
@@ -116,7 +134,12 @@ if __name__ == "__main__":
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
 
-            generate_hard_negatives(data_path)
+            generate_hard_negatives(data_path, "mentalfaq")
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+
+            generate_hard_negatives(data_path, "redditfaq")
         else:
             print("Dataset not selected")
 
@@ -128,6 +151,11 @@ if __name__ == "__main__":
             data_path = F"{str(path)}/file/data/MentalFAQ"
 
             generate_ground_truth_dataset(data_path)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+
+            generate_ground_truth_dataset(data_path)
         else:
             print("Dataset not selected")
 
@@ -137,7 +165,11 @@ if __name__ == "__main__":
         # python app\question_answering.py -o generate_topk -d <<dataset_name>>
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
-            generate_topk_results(data_path)
+            generate_topk_results(data_path, "mentalfaq")
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+            generate_topk_results(data_path, "redditfaq")
         else:
             print("Dataset not selected")
 
@@ -148,6 +180,13 @@ if __name__ == "__main__":
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
             output_path = F"{str(path)}/output/MentalFAQ"
+            model_name = args.model
+
+            model_training(data_path,output_path,model_name)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+            output_path = F"{str(path)}/output/RedditFAQ"
             model_name = args.model
 
             model_training(data_path,output_path,model_name)
@@ -163,6 +202,12 @@ if __name__ == "__main__":
             model_path = F"{str(path)}/output/MentalFAQ"
 
             generate_prediction_results(data_path,model_path)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+            model_path = F"{str(path)}/output/RedditFAQ"
+
+            generate_prediction_results(data_path,model_path)
         else:
             print("Dataset not selected")
 
@@ -172,6 +217,10 @@ if __name__ == "__main__":
         # python app\question_answering.py -o generate_reranked_results -d <<dataset_name>>
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
+            generate_reranked_results(data_path)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
             generate_reranked_results(data_path)
         else:
             print("Dataset not selected")
@@ -183,6 +232,12 @@ if __name__ == "__main__":
         if(args.dataset == "MentalFAQ"):
             data_path = F"{str(path)}/file/data/MentalFAQ"
             output_path = F"{str(path)}/output/MentalFAQ"
+
+            evaluate(data_path, output_path)
+
+        elif(args.dataset == "Reddit"):
+            data_path = F"{str(path)}/file/data/RedditFAQ"
+            output_path = F"{str(path)}/output/RedditFAQ"
 
             evaluate(data_path, output_path)
         else:

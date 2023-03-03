@@ -12,7 +12,7 @@ from shared.utils import load_from_json
 from shared.utils import dump_to_json
 from shared.utils import make_dirs
 
-def generate_topk_results(data_path, top_k=100):
+def generate_topk_results(data_path, index_name, top_k=100):
     # Generate list of test queries, relevance labels for ReRanker class
     query_answer_pair_filepath = data_path+'/query_answer_pairs.json'
     relevance_label_df = get_relevance_label_df(query_answer_pair_filepath)
@@ -35,10 +35,10 @@ def generate_topk_results(data_path, top_k=100):
 
     es = Elasticsearch([{'host':'localhost','port':9200}], http_auth=('elastic', 'elastic')) 
 
-    es_query_by_question = r.get_es_topk_results(es=es, index='mentalfaq', query_by=['question'], top_k=top_k)
-    es_query_by_answer = r.get_es_topk_results(es=es, index='mentalfaq', query_by=['answer'], top_k=top_k)
-    es_query_by_question_answer = r.get_es_topk_results(es=es, index='mentalfaq', query_by=['question', 'answer'], top_k=top_k)
-    es_query_by_question_answer_concat = r.get_es_topk_results(es=es, index='mentalfaq', query_by=['question_answer'], top_k=top_k)
+    es_query_by_question = r.get_es_topk_results(es=es, index=index_name, query_by=['question'], top_k=top_k)
+    es_query_by_answer = r.get_es_topk_results(es=es, index=index_name, query_by=['answer'], top_k=top_k)
+    es_query_by_question_answer = r.get_es_topk_results(es=es, index=index_name, query_by=['question', 'answer'], top_k=top_k)
+    es_query_by_question_answer_concat = r.get_es_topk_results(es=es, index=index_name, query_by=['question_answer'], top_k=top_k)
 
     # Save Elasticsearch results to json files
     dump_to_json(es_query_by_question, output_path + '/es_query_by_question.json')
